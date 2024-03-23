@@ -1,0 +1,31 @@
+%initial data
+clear
+load 'Meses.txt'
+load 'datos.txt'
+G=[];
+
+%construction of three dimensional matriz
+DatosE=datos;
+Matriz2=zeros(731,18,21);
+dia=1;
+
+for i=2016:1:2017
+  for j=1:1:12
+    for k=1:1:Meses(j,1)
+      g=find(DatosE(:,5)==i&DatosE(:,4)==j& DatosE(:,3)==k);
+       if rows(g)~=0
+        for m=1:1:rows(g)
+          x=g(m,1);
+          est=DatosE(x,1);
+          esp=DatosE(x,2);
+          G=[G;est,esp,dia];
+          Matriz2(dia,est,esp)=Matriz2(dia,est,esp)+1;
+        endfor
+       end
+  dia=dia+1;
+    endfor 
+  endfor
+endfor
+
+save Matriz2.txt Matriz2
+save G.txt G
