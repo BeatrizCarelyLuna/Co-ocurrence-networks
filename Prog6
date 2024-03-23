@@ -1,0 +1,16 @@
+clear
+load 'Fechascamaras.txt'
+load 'Meses.txt'
+
+fechas=[];
+
+for k=1:1:rows(Fechascamaras)
+  r=Fechascamaras(k,4)-2016;
+  diai=sum(Meses(1:12*r+Fechascamaras(k,3)-1,1))+Fechascamaras(k,2);
+  r=Fechascamaras(k,7)-2016;
+  diaf=sum(Meses(1:12*r+Fechascamaras(k,6)-1,1))+Fechascamaras(k,5);
+  fechas=[fechas;diai,diaf,diaf-diai+1];
+
+endfor
+
+save fechas fechas
