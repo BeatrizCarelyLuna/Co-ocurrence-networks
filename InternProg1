@@ -1,0 +1,38 @@
+clear
+for y=1:1:100
+
+  load 'Matriz2.txt'
+  Matriz3=sign(Matriz2);
+  load 'Frec'
+  load 'fechas'
+  Z=fechas;
+  Frec=Frec';
+  ne=21
+  Matriz4=zeros(731,18,ne);
+  i=1;
+  Lista=[];
+  Lista2=zeros(1,ne);
+
+  while  i<sum(sum(sum(Matriz3)))
+    estacion=ceil(rand(1,1)*columns(Matriz3));
+    w=estacion;
+    dia=floor(Z(w,1)+rand(1,1)*(Z(w,3)));
+    especie=floor(rand(1,1)*(ne+1));
+    if  estacion~=0 && especie~=0 
+      if  sum(sum(Matriz4(:,estacion,especie)))<Frec(estacion,especie) 
+        Matriz4(dia,estacion,especie)=1;
+        i=sum(sum(sum(Matriz4)));
+      end
+    end
+  endwhile
+
+  coincidencias2
+  desfase2
+  mediadesfases2
+
+  file_name=strcat('Todob',num2str(y),'.txt');   
+  save nombre R4
+  rename ('nombre', [file_name])
+ 
+endfor
+
