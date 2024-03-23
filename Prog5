@@ -1,0 +1,24 @@
+clear
+ne=21
+R2=[];
+F=[];
+
+todo=[];
+
+for k=0:1:20
+  file_name=strcat('desfase',num2str(k),'dias.txt');
+  load (file_name);
+  F(:,:,k+1)=E;
+endfor
+
+for i=1:1:ne
+  for j=1:1:ne
+    vec=[];
+      for m=1:1:ne
+        vec=[vec,F(i,j,m)];
+      endfor
+    R2=[R2;i,j,vec];
+endfor
+endfor
+
+save R2.txt R2 
