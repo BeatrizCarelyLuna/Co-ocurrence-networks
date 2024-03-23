@@ -1,0 +1,21 @@
+clear
+
+load 'Matriz2.txt'
+Matriz=sign(Matriz2);
+ne=21;
+
+E=zeros(ne,ne);
+
+for i=1:1:ne
+  for j=i:1:ne
+    D=sign(Matriz(:,:,i))+sign(Matriz(:,:,j));
+    E(i,j)=rows(find(D==2));
+    E(j,i)=rows(find(D==2));
+  endfor
+endfor
+
+for pr=1:1:ne
+  E(pr,pr)=0;
+endfor
+    
+save desfase0dias.txt E
