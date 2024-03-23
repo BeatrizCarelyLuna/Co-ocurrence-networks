@@ -1,0 +1,14 @@
+clear
+load 'Matriz2.txt'
+
+Matriz3=sign(Matriz2);
+
+Frec=[];
+
+for i=1:1:21
+  for j=1:1:18
+    Frec(i,j)=sum(sum(Matriz3(:,j,i)));
+  endfor
+endfor
+
+save Frec Frec
