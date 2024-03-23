@@ -1,0 +1,23 @@
+clear
+load 'Matriz2.txt'
+Matriz=sign(Matriz2);
+ne=21;
+
+for m=1:1:20
+  B=[];
+  C=[];
+  E=zeros(ne,ne);
+  G=[];
+    for i=1:1:ne
+      for j=1:1:ne
+        D=sign(Matriz(1:731-m,:,i))+sign(Matriz(m+1:731,:,j));
+        E(i,j)=rows(find(D==2));
+      endfor
+    endfor
+    for pr=1:1:ne
+      E(pr,pr)=0;
+    endfor
+  file_name=strcat('desfase',num2str(m),'dias.txt');   
+  save nombre E
+  rename ('nombre', [file_name])
+endfor
