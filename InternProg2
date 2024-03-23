@@ -1,0 +1,35 @@
+clear
+MT=[];
+
+for k=1:1:100
+  file_name=strcat('Todob',num2str(k),'.txt');
+  load (file_name);
+  MT(:,:,k)=R4;
+endfor
+
+MTpasa=[];
+MTpasap=[];
+load 'R2.txt'
+
+for j=1:1:rows(R2)
+  for m=1:1:columns(R2)
+    MTpasap(j,m)=(1+sum(MT(j,m,:)>=R2(j,m)))/101;
+  endfor
+endfor
+
+MTpasa=(MTpasap<0.05);
+MTpasa=[R2(:,1:2),MTpasa(:,3:23)]
+MTpasap=[R2(:,1:2),MTpasap(:,3:23)]
+
+LIs=[]
+for t=1:1:rows(MTpasap)
+  r=sum(MTpasa(t,3:23))
+  if r~=0
+    g=find(MTpasa(t,3:23)==1)
+    LIs=[LIs;MTpasa(t,1),MTpasa(t,2),g(1,1),MTpasap(t,g(1,1)+2),r];
+  end
+endfor
+
+
+
+save analisis2B.txt MTpasa LIs MTpasap
